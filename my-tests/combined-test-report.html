@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combined White-Box Testing Report - Rocket.Chat</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px;
+        }
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .summary-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .summary-card:hover {
+            transform: translateY(-5px);
+        }
+        .summary-card h3 {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+        .summary-card .number {
+            font-size: 3em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            font-size: 1.8em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        tr:hover {
+            background: #f8f9ff;
+        }
+        .status-pass {
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .module-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+        .badge-channel {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+        .badge-message {
+            background: #fce7f3;
+            color: #be185d;
+        }
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #6c757d;
+            border-top: 1px solid #dee2e6;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 White-Box Testing Report</h1>
+            <p>Rocket.Chat - Comprehensive Test Suite</p>
+            <p style="font-size: 0.9em; margin-top: 10px;">Generated: 12/3/2025, 11:25:52 AM</p>
+        </div>
+
+        <div class="content">
+            <div class="summary">
+                <div class="summary-card">
+                    <h3>Test Suites</h3>
+                    <div class="number">9/9</div>
+                    <p>Passed</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Test Cases</h3>
+                    <div class="number">74/74</div>
+                    <p>Passed</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Execution Time</h3>
+                    <div class="number">1.452s</div>
+                    <p>Total Duration</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Success Rate</h3>
+                    <div class="number">100%</div>
+                    <p>Pass Rate</p>
+                </div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 100%">
+                    74 / 74 Tests Passed
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>📊 Module Coverage</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Module</th>
+                            <th>Test Files</th>
+                            <th>Test Cases</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><span class="module-badge badge-channel">CHANNEL</span> channel-settings</td>
+                            <td>9</td>
+                            <td>74</td>
+                            <td class="status-pass">✓ PASS</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><span class="module-badge badge-message">MESSAGE</span> message-mark-as-unread</td>
+                            <td>1</td>
+                            <td>15</td>
+                            <td class="status-pass">✓ PASS</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>📁 Test Files Detail</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Test File</th>
+                            <th>Module</th>
+                            <th>Tests</th>
+                            <th>Coverage Areas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>saveRoomAnnouncement.test.js</td>
+                            <td><span class="module-badge badge-channel">CHANNEL</span></td>
+                            <td>7</td>
+                            <td>Input validation, String/Object handling, System messages</td>
+                        </tr>
+                        <tr>
+                            <td>saveRoomDescription.test.js</td>
+                            <td><span class="module-badge badge-channel">CHANNEL</span></td>
+                            <td>8</td>
+                            <td>Description updates, HTML handling, Validation</td>
+                        </tr>
+                        <tr>
+                            <td>saveRoomReadOnly.test.js</td>
+                            <td><span class="module-badge badge-channel">CHANNEL</span></td>
+                            <td>8</td>
+                            <td>Read-only status, Message types, Conditional logic</td>
+                        </tr>
+                        <tr>
+                            <td>saveRoomTopic.test.js</td>
+                            <td><span class="module-badge badge-channel">CHANNEL</span></td>
+                            <td>8</td>
+                            <td>Topic updates, Hooks, Empty handling</td>
+                        </tr>
+                        <tr>
+                            <td>saveRoomType.test.js</td>
+                            <td><span class="module-badge badge-channel">CHANNEL</span></td>
+                            <td>10</td>
+                            <td>Public/Private conversion, Type validation</td>
+                        </tr>
+                        <tr>
+                            <td>saveRoomEncrypted.test.js</td>
+                            <td><span class="module-badge badge-channel">CHANNEL</span></td>
+                            <td>10</td>
+                            <td>E2E encryption, Auto-translate, User validation</td>
+                        </tr>
+                        <tr>
+                            <td>saveRoomCustomFields.test.js</td>
+                            <td><span class="module-badge badge-channel">CHANNEL</span></td>
+                            <td>9</td>
+                            <td>Custom fields validation, Object/Array handling</td>
+                        </tr>
+                        <tr>
+                            <td>saveRoomSystemMessages.test.js</td>
+                            <td><span class="module-badge badge-channel">CHANNEL</span></td>
+                            <td>7</td>
+                            <td>Message type validation, Array validation</td>
+                        </tr>
+                        <tr>
+                            <td>saveReactWhenReadOnly.test.js</td>
+                            <td><span class="module-badge badge-channel">CHANNEL</span></td>
+                            <td>7</td>
+                            <td>Reaction permissions, Read-only handling</td>
+                        </tr>
+                        <tr>
+                            <td>unreadMessages.test.js</td>
+                            <td><span class="module-badge badge-message">MESSAGE</span></td>
+                            <td>15</td>
+                            <td>Room-based unread, Message-based unread, Error handling</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>🎯 Test Coverage Breakdown</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Test Cases</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Input Validation</td>
+                            <td>27</td>
+                            <td>Testing null, empty, invalid inputs, type checking</td>
+                        </tr>
+                        <tr>
+                            <td>Database Operations</td>
+                            <td>20</td>
+                            <td>CRUD operations, update results, subscriptions</td>
+                        </tr>
+                        <tr>
+                            <td>System Messages</td>
+                            <td>18</td>
+                            <td>Message sending conditions, notification triggers</td>
+                        </tr>
+                        <tr>
+                            <td>Conditional Logic</td>
+                            <td>15</td>
+                            <td>If/else branches, switch cases, path coverage</td>
+                        </tr>
+                        <tr>
+                            <td>Error Handling</td>
+                            <td>9</td>
+                            <td>Exception throwing, error messages, edge cases</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>✅ Test Results Summary</h2>
+                <div style="background: #f0fdf4; padding: 20px; border-radius: 10px; border-left: 4px solid #10b981;">
+                    <h3 style="color: #10b981; margin-bottom: 15px;">Channel Settings Module (74 tests)</h3>
+                    <ul style="list-style: none; padding-left: 20px;">
+                        <li style="margin: 8px 0;">✓ TC-WB-001 to TC-WB-007: saveRoomAnnouncement</li>
+                        <li style="margin: 8px 0;">✓ TC-WB-008 to TC-WB-015: saveRoomDescription</li>
+                        <li style="margin: 8px 0;">✓ TC-WB-016 to TC-WB-023: saveRoomReadOnly</li>
+                        <li style="margin: 8px 0;">✓ TC-WB-024 to TC-WB-031: saveRoomTopic</li>
+                        <li style="margin: 8px 0;">✓ TC-WB-032 to TC-WB-041: saveRoomType</li>
+                        <li style="margin: 8px 0;">✓ TC-WB-042 to TC-WB-051: saveRoomEncrypted</li>
+                        <li style="margin: 8px 0;">✓ TC-WB-052 to TC-WB-060: saveRoomCustomFields</li>
+                        <li style="margin: 8px 0;">✓ TC-WB-061 to TC-WB-067: saveRoomSystemMessages</li>
+                        <li style="margin: 8px 0;">✓ TC-WB-068 to TC-WB-074: saveReactWhenReadOnly</li>
+                    </ul>
+                </div>
+                <div style="background: #fdf2f8; padding: 20px; border-radius: 10px; border-left: 4px solid #be185d; margin-top: 20px;">
+                    <h3 style="color: #be185d; margin-bottom: 15px;">Message Mark as Unread Module (15 tests)</h3>
+                    <ul style="list-style: none; padding-left: 20px;">
+                        <li style="margin: 8px 0;">✓ TC-MSG-001 to TC-MSG-004: Room-based unread marking</li>
+                        <li style="margin: 8px 0;">✓ TC-MSG-005 to TC-MSG-013: Message-based unread marking</li>
+                        <li style="margin: 8px 0;">✓ TC-MSG-014 to TC-MSG-015: Edge cases and error handling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Generated by Jest Testing Framework</strong></p>
+            <p>Rocket.Chat White-Box Testing Suite</p>
+            <p>Software Quality Engineering Project - December 2025</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">
+                <strong>Total Functions Tested:</strong> 10 | 
+                <strong>Total Test Cases:</strong> 74 | 
+                <strong>Success Rate:</strong> 100.0%
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+  "name": "my-tests",
+  "version": "1.0.0",
+  "description": "Rocket.Chat White-Box Testing",
+  "scripts": {
+    "test": "jest --coverage --verbose"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**",
+      "!**/coverage/**",
+      "!**/*.test.js",
+      "!**/*.spec.js",
+      "!**/mocks/**"
+    ],
+    "testMatch": [
+      "**/*.test.js",
+      "**/*.spec.js"
+    ],
+    "coverageReporters": ["text", "html", "lcov"],
+    "testPathIgnorePatterns": ["/node_modules/", "/coverage/"]
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0"
+  }
+}

@@ -1,0 +1,278 @@
+<html><head><meta charset="utf-8"/><title>White-Box Testing Report - Rocket.Chat</title><style type="text/css">:root {
+  --text-primary: #eee;
+  --text-secondary: #aaa;
+  --success: #2ecc71;
+  --success-bright: #1e3d2a;
+  --danger: #e74c3c;
+  --danger-bright: #3d1e1e;
+  --warning: #f39c12;
+  --warning-bright: #3d2c1e;
+  --panel: #1f1f1f;
+  --border: #444;
+  --disabled: #666;
+  background-color: #121212;
+}
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: var(--text-primary);
+}
+body {
+  padding: 2rem 1rem;
+}
+.jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+#metadata-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.additional-information-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/** SUMMARY */
+#summary {
+  color: var(--text-primary);
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 0.5rem;
+  background: var(--panel);
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: var(--success);
+  border-left: 0.4rem solid var(--success);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: var(--danger);
+  border-left: 0.4rem solid var(--danger);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-pending {
+  color: var(--warning);
+  border-left: 0.4rem solid var(--warning);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-empty {
+  color: var(--disabled);
+  border-left: 0.4rem solid var(--disabled);
+  margin-bottom: 0.15rem;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: var(--success-bright);
+  color: var(--success);
+}
+.test-result.failed {
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.test-result.pending {
+  background-color: var(--warning-bright);
+  color: var(--warning);
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed var(--danger);
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 1rem;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: var(--panel);
+  color: var(--text-secondary);
+  border: 0.15rem solid;
+  border-color: var(--panel);
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info:hover {
+  border-color: var(--border);
+  cursor: pointer;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 1rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.85rem;
+}
+.suite-info .suite-time.warn {
+  background-color: var(--danger);
+  color: #fff;
+}
+.suite-info:before {
+  content: "\2303";
+  display: inline-block;
+  margin-right: 1rem;
+  transform: rotate(180deg) translateY(0.15rem);
+}
+.suite-container[open] .suite-info:before {
+  transform: rotate(0deg) translateY(0.15rem);
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--panel);
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><main class="jesthtml-content"><header><h1 id="title">White-Box Testing Report - Rocket.Chat</h1></header><section id="metadata-container"><div id="timestamp">Started: 2025-12-02 21:22:37</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (9)</div><div class="summary-passed ">9 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (74)</div><div class="summary-passed ">74 passed</div><div class="summary-failed  summary-empty">0 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></section><details id="suite-1" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/aymen/Downloads/Rocket.Chat-develop/my-tests/channeltests/saveRoomSystemMessages.test.js</div><div class="suite-time">0.408s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomSystemMessages - White-Box Testing</div><div class="test-title">TC-WB-061: should throw error for invalid room ID</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomSystemMessages - White-Box Testing</div><div class="test-title">TC-WB-062: should throw error for non-array systemMessages</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomSystemMessages - White-Box Testing</div><div class="test-title">TC-WB-063: should throw error for invalid message type</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomSystemMessages - White-Box Testing</div><div class="test-title">TC-WB-064: should accept valid message types</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomSystemMessages - White-Box Testing</div><div class="test-title">TC-WB-065: should handle empty array</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomSystemMessages - White-Box Testing</div><div class="test-title">TC-WB-066: should validate each message type in array</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomSystemMessages - White-Box Testing</div><div class="test-title">TC-WB-067: should return database result</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-2" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/aymen/Downloads/Rocket.Chat-develop/my-tests/channeltests/saveRoomDescription.test.js</div><div class="suite-time">0.152s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomDescription - White-Box Testing</div><div class="test-title">TC-WB-008: should throw error for null room ID</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomDescription - White-Box Testing</div><div class="test-title">TC-WB-009: should throw error for empty room ID</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomDescription - White-Box Testing</div><div class="test-title">TC-WB-010: should throw error for numeric room ID</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomDescription - White-Box Testing</div><div class="test-title">TC-WB-011: should update description in database</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomDescription - White-Box Testing</div><div class="test-title">TC-WB-012: should always send system message</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomDescription - White-Box Testing</div><div class="test-title">TC-WB-013: should handle empty description</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomDescription - White-Box Testing</div><div class="test-title">TC-WB-014: should handle HTML in description</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomDescription - White-Box Testing</div><div class="test-title">TC-WB-015: should return update result</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-3" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/aymen/Downloads/Rocket.Chat-develop/my-tests/channeltests/saveRoomEncrypted.test.js</div><div class="suite-time">0.156s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomEncrypted - White-Box Testing</div><div class="test-title">TC-WB-042: should throw error for invalid room ID</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomEncrypted - White-Box Testing</div><div class="test-title">TC-WB-043: should throw error for invalid user</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomEncrypted - White-Box Testing</div><div class="test-title">TC-WB-044: should throw error for user without _id</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomEncrypted - White-Box Testing</div><div class="test-title">TC-WB-045: should enable encryption</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomEncrypted - White-Box Testing</div><div class="test-title">TC-WB-046: should send "e2e_enabled" message when enabling</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomEncrypted - White-Box Testing</div><div class="test-title">TC-WB-047: should send "e2e_disabled" message when disabling</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomEncrypted - White-Box Testing</div><div class="test-title">TC-WB-048: should disable auto-translate when enabling encryption</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomEncrypted - White-Box Testing</div><div class="test-title">TC-WB-049: should not disable auto-translate when disabling encryption</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomEncrypted - White-Box Testing</div><div class="test-title">TC-WB-050: should execute if-branch for encrypted=true</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomEncrypted - White-Box Testing</div><div class="test-title">TC-WB-051: should return update result</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-4" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/aymen/Downloads/Rocket.Chat-develop/my-tests/channeltests/saveRoomTopic.test.js</div><div class="suite-time">0.127s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomTopic - White-Box Testing</div><div class="test-title">TC-WB-024: should throw error for invalid room ID</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomTopic - White-Box Testing</div><div class="test-title">TC-WB-025: should find room before updating</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomTopic - White-Box Testing</div><div class="test-title">TC-WB-026: should call beforeTopicChange hook</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomTopic - White-Box Testing</div><div class="test-title">TC-WB-027: should update topic in database</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomTopic - White-Box Testing</div><div class="test-title">TC-WB-028: should send system message when enabled</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomTopic - White-Box Testing</div><div class="test-title">TC-WB-029: should handle undefined topic with empty string</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomTopic - White-Box Testing</div><div class="test-title">TC-WB-030: should not send message when disabled</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomTopic - White-Box Testing</div><div class="test-title">TC-WB-031: should return update result</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-5" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/aymen/Downloads/Rocket.Chat-develop/my-tests/channeltests/saveRoomReadOnly.test.js</div><div class="suite-time">0.13s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomReadOnly - White-Box Testing</div><div class="test-title">TC-WB-016: should throw error for invalid room ID</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomReadOnly - White-Box Testing</div><div class="test-title">TC-WB-017: should set room to read-only</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomReadOnly - White-Box Testing</div><div class="test-title">TC-WB-018: should send "set-read-only" message when enabling</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomReadOnly - White-Box Testing</div><div class="test-title">TC-WB-019: should send "removed-read-only" message when disabling</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomReadOnly - White-Box Testing</div><div class="test-title">TC-WB-020: should not send message when sendMessage is false</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomReadOnly - White-Box Testing</div><div class="test-title">TC-WB-021: should execute if-branch for readOnly=true</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomReadOnly - White-Box Testing</div><div class="test-title">TC-WB-022: should execute else-branch for readOnly=false</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomReadOnly - White-Box Testing</div><div class="test-title">TC-WB-023: should return database result</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div></div></details><details id="suite-6" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/aymen/Downloads/Rocket.Chat-develop/my-tests/channeltests/saveRoomType.test.js</div><div class="suite-time">0.133s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomType - White-Box Testing</div><div class="test-title">TC-WB-032: should throw error for invalid room ID</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomType - White-Box Testing</div><div class="test-title">TC-WB-033: should throw error for invalid room type</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomType - White-Box Testing</div><div class="test-title">TC-WB-034: should throw error if room not found</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomType - White-Box Testing</div><div class="test-title">TC-WB-035: should accept type "c" (channel)</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomType - White-Box Testing</div><div class="test-title">TC-WB-036: should accept type "p" (private)</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomType - White-Box Testing</div><div class="test-title">TC-WB-037: should update both Rooms and Subscriptions</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomType - White-Box Testing</div><div class="test-title">TC-WB-038: should send "public" message for type c</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomType - White-Box Testing</div><div class="test-title">TC-WB-039: should send "private" message for type p</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomType - White-Box Testing</div><div class="test-title">TC-WB-040: should not send message when disabled</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomType - White-Box Testing</div><div class="test-title">TC-WB-041: should return array of results</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-7" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/aymen/Downloads/Rocket.Chat-develop/my-tests/channeltests/saveRoomCustomFields.test.js</div><div class="suite-time">0.136s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomCustomFields - White-Box Testing</div><div class="test-title">TC-WB-052: should throw error for invalid room ID</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomCustomFields - White-Box Testing</div><div class="test-title">TC-WB-053: should throw error for empty room ID</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomCustomFields - White-Box Testing</div><div class="test-title">TC-WB-054: should throw error for non-object customFields</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomCustomFields - White-Box Testing</div><div class="test-title">TC-WB-055: should throw error for array customFields</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomCustomFields - White-Box Testing</div><div class="test-title">TC-WB-056: should throw error for null customFields</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomCustomFields - White-Box Testing</div><div class="test-title">TC-WB-057: should accept valid custom fields object</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomCustomFields - White-Box Testing</div><div class="test-title">TC-WB-058: should update subscriptions with custom fields</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomCustomFields - White-Box Testing</div><div class="test-title">TC-WB-059: should handle empty custom fields object</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomCustomFields - White-Box Testing</div><div class="test-title">TC-WB-060: should return database result</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div></div></details><details id="suite-8" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/aymen/Downloads/Rocket.Chat-develop/my-tests/channeltests/saveReactWhenReadOnly.test.js</div><div class="suite-time">0.134s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveReactWhenReadOnly - White-Box Testing</div><div class="test-title">TC-WB-068: should throw error for invalid room ID</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveReactWhenReadOnly - White-Box Testing</div><div class="test-title">TC-WB-069: should allow reacting when true</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveReactWhenReadOnly - White-Box Testing</div><div class="test-title">TC-WB-070: should disallow reacting when false</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveReactWhenReadOnly - White-Box Testing</div><div class="test-title">TC-WB-071: should send "allowed-reacting" message when enabling</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveReactWhenReadOnly - White-Box Testing</div><div class="test-title">TC-WB-072: should send "disallowed-reacting" message when disabling</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveReactWhenReadOnly - White-Box Testing</div><div class="test-title">TC-WB-073: should not send message when disabled</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveReactWhenReadOnly - White-Box Testing</div><div class="test-title">TC-WB-074: should return database result</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-9" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/home/aymen/Downloads/Rocket.Chat-develop/my-tests/channeltests/saveRoomAnnouncement.test.js</div><div class="suite-time">0.127s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomAnnouncement - White-Box Testing</div><div class="test-title">TC-WB-001: should throw error for null room ID</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomAnnouncement - White-Box Testing</div><div class="test-title">TC-WB-002: should throw error for empty room ID</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomAnnouncement - White-Box Testing</div><div class="test-title">TC-WB-003: should handle string announcement</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomAnnouncement - White-Box Testing</div><div class="test-title">TC-WB-004: should handle object announcement</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomAnnouncement - White-Box Testing</div><div class="test-title">TC-WB-005: should send system message when enabled</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomAnnouncement - White-Box Testing</div><div class="test-title">TC-WB-006: should not send message when disabled</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">saveRoomAnnouncement - White-Box Testing</div><div class="test-title">TC-WB-007: should return update result</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details></main></body></html>

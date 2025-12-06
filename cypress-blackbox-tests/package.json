@@ -1,0 +1,18 @@
+{
+  "name": "rocketchat-cypress-blackbox-tests",
+  "version": "1.0.0",
+  "description": "Black-Box Testing for Rocket.Chat using Cypress",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "cypress run --headless",
+    "test:chrome": "cypress run --browser chrome",
+    "test:ui": "cypress open"
+  },
+  "keywords": ["cypress", "black-box", "e2e", "rocket.chat"],
+  "author": "SQE Student 2",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^13.6.2"
+  }
+}
