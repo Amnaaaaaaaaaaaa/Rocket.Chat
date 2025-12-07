@@ -30,7 +30,6 @@ jobs:
           mv .preview ${{ github.ref_name }}
           mkdir .preview
           mv ${{ github.ref_name }} .preview
-
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
