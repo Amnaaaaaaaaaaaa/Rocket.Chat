@@ -1,0 +1,15 @@
+{
+  "name": "rocket-chat-tests",
+  "version": "1.0.0",
+  "description": "Unit tests for Rocket.Chat",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:verbose": "jest --verbose",
+    "coverage:open": "open ../coverage/lcov-report/index.html || xdg-open ../coverage/lcov-report/index.html"
+  },
+  "keywords": ["test", "jest", "unit-test"],
+  "author": "Amna",
+  "license": "ISC"
+}

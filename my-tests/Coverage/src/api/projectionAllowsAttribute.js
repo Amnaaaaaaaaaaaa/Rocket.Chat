@@ -1,11 +1,30 @@
-// Auto-generated stub implementation
-module.exports = new Proxy({}, {
-  get: (target, prop) => {
-    if (typeof prop === 'string' && !prop.startsWith('_')) {
-      return function(...args) {
-        return Promise.resolve({ success: true });
-      };
-    }
-    return target[prop];
+function projectionAllowsAttribute(attributeName, options) {
+  if (!options || !options.projection) {
+    return true;
   }
-});
+  
+  const projection = options.projection;
+  
+  if (projection[attributeName] === 1) {
+    return true;
+  }
+  
+  if (projection[attributeName] === 0) {
+    return false;
+  }
+  
+  const hasInclusion = Object.values(projection).some(v => v === 1);
+  const hasExclusion = Object.values(projection).some(v => v === 0);
+  
+  if (hasInclusion) {
+    return false;
+  }
+  
+  if (hasExclusion) {
+    return true;
+  }
+  
+  return true;
+}
+
+module.exports = { projectionAllowsAttribute };

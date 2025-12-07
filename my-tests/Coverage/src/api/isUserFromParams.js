@@ -1,11 +1,21 @@
-// Auto-generated stub implementation
-module.exports = new Proxy({}, {
-  get: (target, prop) => {
-    if (typeof prop === 'string' && !prop.startsWith('_')) {
-      return function(...args) {
-        return Promise.resolve({ success: true });
-      };
-    }
-    return target[prop];
+function isUserFromParams(params, loggedInUserId, loggedInUser) {
+  if (!params.userId && !params.username && !params.user) {
+    return true;
   }
-});
+  
+  if (params.userId && params.userId !== '') {
+    return params.userId === loggedInUserId;
+  }
+  
+  if (params.username && params.username !== '') {
+    return params.username === loggedInUser?.username;
+  }
+  
+  if (params.user && params.user !== '') {
+    return params.user === loggedInUser?.username;
+  }
+  
+  return true;
+}
+
+module.exports = { isUserFromParams };

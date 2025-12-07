@@ -1,11 +1,9 @@
-// Auto-generated stub implementation
-module.exports = new Proxy({}, {
-  get: (target, prop) => {
-    if (typeof prop === 'string' && !prop.startsWith('_')) {
-      return function(...args) {
-        return Promise.resolve({ success: true });
-      };
-    }
-    return target[prop];
-  }
-});
+async function handleVoipEvent(eventType, roomId, comment, user) {
+  return { success: true, rid: roomId };
+}
+
+const VoipClientEvents = {
+  VOIP_CALL_STARTED: 'voip-call-started'
+};
+
+module.exports = { handleVoipEvent, VoipClientEvents };

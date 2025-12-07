@@ -6,15 +6,9 @@ function metricsMiddleware(settings, metrics) {
       return await next();
     }
     
-    const path = c.req.path.replace(/\/[0-9a-f]{24}/g, '/:id');
-    const method = c.req.method;
-    
-    const summary = metrics.httpRequestDuration;
-    const endTimer = summary.startTimer({ method, path });
-    
+    const timer = metrics.startTimer();
     await next();
-    
-    endTimer();
+    timer.end();
   };
 }
 

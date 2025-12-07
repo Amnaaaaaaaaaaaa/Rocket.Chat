@@ -1,3 +1,12 @@
+function parseDateParams(dateString) {
+  if (typeof dateString !== 'string') return {};
+  try {
+    return JSON.parse(dateString);
+  } catch {
+    return {};
+  }
+}
+
 function validateDateParams(startDate, endDate) {
   if (!startDate || !endDate) {
     throw new Error('Start date and end date are required');
@@ -14,19 +23,26 @@ function validateDateParams(startDate, endDate) {
     throw new Error('Invalid end date');
   }
   
-  if (start > end) {
-    throw new Error('Start date cannot be after end date');
-  }
-  
-  return { start, end };
+  return { start: startDate, end: endDate };
 }
 
-function isRoomSearchProps(params) {
-  return params && (params.roomId || params.roomName);
+function parseAndValidate(fieldName, dateString) {
+  const parsed = parseDateParams(dateString);
+  return parsed;
 }
 
-function isRoomCreationProps(params) {
-  return params && params.name && params.type;
+function isRoomSearchProps(props) {
+  return !!(props.rid && props.token);
 }
 
-module.exports = { validateDateParams, isRoomSearchProps, isRoomCreationProps };
+function isRoomCreationProps(props) {
+  return !!(props.agentId && props.direction);
+}
+
+module.exports = {
+  parseDateParams,
+  validateDateParams,
+  parseAndValidate,
+  isRoomSearchProps,
+  isRoomCreationProps
+};

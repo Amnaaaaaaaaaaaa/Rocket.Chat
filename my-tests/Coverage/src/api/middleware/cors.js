@@ -1,9 +1,14 @@
 function cors(settings) {
-  return async function corsMiddleware(c, next) {
-    const origin = c.req.header('origin') || '*';
-    const allowedOrigins = await settings.get('API_CORS_Origin') || '*';
+  return async function(c, next) {
+    const enabled = await settings.get('API_Enable_CORS');
+    if (!enabled) {
+      return await next();
+    }
+
+    const origin = c.req.header('origin');
+    const allowedOrigins = (await settings.get('API_CORS_Origin') || '*').toLowerCase();
     
-    if (allowedOrigins === '*' || allowedOrigins.includes(origin)) {
+    if (allowedOrigins === '*' || allowedOrigins.split(',').map(o => o.trim()).includes(origin?.toLowerCase())) {
       c.res.setHeader('Access-Control-Allow-Origin', origin);
     }
     
@@ -12,11 +17,10 @@ function cors(settings) {
     c.res.setHeader('Access-Control-Allow-Credentials', 'true');
     
     if (c.req.method === 'OPTIONS') {
-      c.res.status(200);
-      return;
+      return c.res.end();
     }
     
-    await next();
+    return await next();
   };
 }
 
